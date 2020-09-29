@@ -93,3 +93,19 @@ std::stringstream BinarySearchTree::PostOrder(Node* node) {
 	buffer << node->getData() << "\n";
 	return buffer;
 }
+
+std::stringstream BinarySearchTree::dataPreOrder() {
+	return PreOrder(root);
+}
+
+std::stringstream BinarySearchTree::PreOrder(Node* node) {
+	std::stringstream buffer;
+	buffer << node->getData() << "\n";
+	if (node->getLeft() != nullptr) {
+		buffer << PreOrder(node->getLeft()).rdbuf();
+	}
+	if (node->getRight() != nullptr) {
+		buffer << PreOrder(node->getRight()).rdbuf();
+	}
+	return buffer;
+}

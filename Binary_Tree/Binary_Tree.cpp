@@ -20,13 +20,16 @@ int main()
     plantTree(tree2, "./tree2.txt");
 
 
-    std::cout << tree1.dataPostOrder().str() << std::endl;
+    std::cout << tree1.dataPostOrder().str() << std::endl << std::endl;
+    std::cout << tree1.dataPreOrder().str() << std::endl << std::endl;
 
     std::cout << tree1.getHeight() << std::endl;
     std::cout << tree1.isBalanced() << std::endl << std::endl;
 
 
-    std::cout << tree2.dataPostOrder().str() << std::endl;
+    std::cout << tree2.dataPostOrder().str() << std::endl << std::endl;
+    std::cout << tree2.dataPreOrder().str() << std::endl << std::endl;
+
 
     std::cout << tree2.getHeight() << std::endl;
     std::cout << tree2.isBalanced() << std::endl << std::endl;
