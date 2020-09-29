@@ -47,10 +47,14 @@ bool BinarySearchTree::isBalanced() {
 }
 
 bool BinarySearchTree::checkBalance() {
-	return abs(getHeight(root->getLeft()) - getHeight(root->getRight())) < 2;
+	return abs(calculateHeight(root->getLeft()) - calculateHeight(root->getRight())) < 2;
 }
 
-int BinarySearchTree::getHeight(Node* node) {
+int BinarySearchTree::getHeight() {
+	return calculateHeight(root);
+}
+
+int BinarySearchTree::calculateHeight(Node* node) {
 	if (node == nullptr) {
 		return 0;
 	}
@@ -58,9 +62,18 @@ int BinarySearchTree::getHeight(Node* node) {
 		return 1;
 	}
 	else {
-		int leftHeight = getHeight(node->getLeft());
-		int rightHeight = getHeight(node->getRight());
+		int leftHeight = calculateHeight(node->getLeft());
+		int rightHeight = calculateHeight(node->getRight());
 		return  1 + max(leftHeight, rightHeight);
+	}
+}
+
+int BinarySearchTree::max(int a, int b) {
+	if (a >= b) {
+		return a;
+	}
+	else {
+		return b;
 	}
 }
 
@@ -77,6 +90,6 @@ std::stringstream BinarySearchTree::PostOrder(Node* node) {
 	if (node->getRight() != nullptr) {
 		buffer << PostOrder(node->getRight()).rdbuf();
 	}
-	buffer << node->getData();
+	buffer << node->getData() << "\n";
 	return buffer;
 }

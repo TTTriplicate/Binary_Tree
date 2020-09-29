@@ -5,15 +5,13 @@ Node::Node() {
 	right = nullptr;
 }
 
-Node::Node(int data) {
-	data = data;
+Node::Node(int inputData) {
+	data = inputData;
 	left = nullptr;
 	right = nullptr;
 }
 
 Node::~Node() {
-	delete left;
-	delete right;
 }
 
 int Node::getData() {

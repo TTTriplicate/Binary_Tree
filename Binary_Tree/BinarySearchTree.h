@@ -11,6 +11,8 @@ private:
 	std::stringstream InOrder(Node* node);
 	std::stringstream PreOrder(Node* node);
 	std::stringstream PostOrder(Node* node);
+	int calculateHeight(Node* node);
+	int max(int a, int b);
 public:
 	BinarySearchTree();
 	~BinarySearchTree();
@@ -21,7 +23,6 @@ public:
 	std::stringstream dataPreOrder();
 	std::stringstream dataPostOrder();
 	bool isBalanced();
-	int getHeight(Node* node);
-	int max(int a, int b);
+	int getHeight();
 };
 

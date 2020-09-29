@@ -7,7 +7,7 @@ private:
 	Node* right;
 public:
 	Node();
-	Node(int data);
+	Node(int inputData);
 	~Node();
 	int getData();
 	Node* getLeft();
