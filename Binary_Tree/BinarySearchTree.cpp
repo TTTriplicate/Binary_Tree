@@ -125,3 +125,19 @@ std::stringstream BinarySearchTree::InOrder(Node* node) {
 	}
 	return buffer;
 }
+
+Node* BinarySearchTree::getMax() {
+	cursor = root;
+	while (cursor->getRight() != nullptr) {
+		cursor = cursor->getRight();
+	}
+	return cursor;
+}
+
+Node* BinarySearchTree::getMin() {
+	cursor = root;
+	while (cursor->getLeft() != nullptr) {
+		cursor = cursor->getLeft();
+	}
+	return cursor;
+}
