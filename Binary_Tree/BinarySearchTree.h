@@ -22,8 +22,7 @@ public:
 	~BinarySearchTree();
 	void insert(int data);
 
-	//I chose std::stringstreams to allow main to determine output format
-	//Not a data strucure's job to define how data is output, just stored
+	//I chose std::stringstream to allow main to determine output format
 	std::stringstream dataInOrder();
 	std::stringstream dataPreOrder();
 	std::stringstream dataPostOrder();

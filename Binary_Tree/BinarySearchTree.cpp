@@ -1,7 +1,12 @@
+/*
+Class: BinarySearchTree
+Purpose: It's a binary search tree
+*/
 #include "BinarySearchTree.h"
 
 BinarySearchTree::BinarySearchTree() {
 	root = nullptr;
+	cursor = nullptr;
 }
 
 BinarySearchTree::~BinarySearchTree() {
@@ -47,6 +52,8 @@ bool BinarySearchTree::isBalanced() {
 }
 
 bool BinarySearchTree::checkBalance() {
+	//uses red-black tree criteria for "close enough" balance
+	//height not more than 1 greater on one side than the other
 	return abs(calculateHeight(root->getLeft()) - calculateHeight(root->getRight())) < 2;
 }
 
@@ -55,13 +62,17 @@ int BinarySearchTree::getHeight() {
 }
 
 int BinarySearchTree::calculateHeight(Node* node) {
+	//recursively adds up the height of subtrees and returns the greatest plus the current height
 	if (node == nullptr) {
+		//empty node has height of 0
 		return 0;
 	}
 	else if (node->getLeft() == nullptr && node->getRight() == nullptr) {
+		//height at node is 1 if there are no deeper subtrees
 		return 1;
 	}
 	else {
+		//height is 1 for current node, plus height of tallest subtree
 		int leftHeight = calculateHeight(node->getLeft());
 		int rightHeight = calculateHeight(node->getRight());
 		return  1 + max(leftHeight, rightHeight);
@@ -69,6 +80,7 @@ int BinarySearchTree::calculateHeight(Node* node) {
 }
 
 int BinarySearchTree::max(int a, int b) {
+	//helper function to return max of 2 integers
 	if (a >= b) {
 		return a;
 	}
@@ -82,6 +94,7 @@ std::stringstream BinarySearchTree::dataPostOrder() {
 }
 
 std::stringstream BinarySearchTree::PostOrder(Node* node) {
+	//recursively returns contents of left subtree, then right subtree, then root
 	std::stringstream buffer;
 
 	if (node->getLeft() != nullptr) {
@@ -99,6 +112,7 @@ std::stringstream BinarySearchTree::dataPreOrder() {
 }
 
 std::stringstream BinarySearchTree::PreOrder(Node* node) {
+	//recursively returns contents of left subtree, then root, then right subtree
 	std::stringstream buffer;
 	buffer << node->getData() << "\n";
 	if (node->getLeft() != nullptr) {
@@ -115,6 +129,7 @@ std::stringstream BinarySearchTree::dataInOrder() {
 }
 
 std::stringstream BinarySearchTree::InOrder(Node* node) {
+	//recursively returns contents of root, then left subtree, then right subtree
 	std::stringstream buffer;
 	if (node->getLeft() != nullptr) {
 		buffer << InOrder(node->getLeft()).rdbuf();
@@ -127,6 +142,7 @@ std::stringstream BinarySearchTree::InOrder(Node* node) {
 }
 
 Node* BinarySearchTree::getMax() {
+	//returns maximum-value node
 	cursor = root;
 	while (cursor->getRight() != nullptr) {
 		cursor = cursor->getRight();
@@ -135,6 +151,7 @@ Node* BinarySearchTree::getMax() {
 }
 
 Node* BinarySearchTree::getMin() {
+	//returns minimum-value node
 	cursor = root;
 	while (cursor->getLeft() != nullptr) {
 		cursor = cursor->getLeft();

@@ -1,3 +1,7 @@
+/*
+Class: Node
+Purpose: nodes for a binary search tree
+*/
 #include "Node.h"
 
 Node::Node() {
