@@ -28,7 +28,7 @@ int main()
     std::cout << "Max value in tree 1: " << tree1.getMax()->getData() << std::endl;
 
     std::cout << "Height of tree 1: " << tree1.getHeight() << std::endl;
-    std::string treeBalance = tree1.isBalanced() ? "Tree 1 is balanced" : "Tree 1 is not blanced";
+    std::string treeBalance = tree1.isBalanced() ? "Tree 1 is balanced" : "Tree 1 is not balanced";
     std::cout << treeBalance << std::endl << std::endl;
 
 
@@ -40,7 +40,7 @@ int main()
     std::cout << "Max value in tree 2: " << tree2.getMax()->getData() << std::endl;
 
     std::cout << "Height of Tree 2: " << tree2.getHeight() << std::endl;
-    treeBalance = tree2.isBalanced() ? "Tree 2 is balanced" : "Tree 2 is not blanced";
+    treeBalance = tree2.isBalanced() ? "Tree 2 is balanced" : "Tree 2 is not balanced";
     std::cout << treeBalance << std::endl << std::endl;
 
 }

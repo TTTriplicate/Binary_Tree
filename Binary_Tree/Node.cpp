@@ -12,6 +12,8 @@ Node::Node(int inputData) {
 }
 
 Node::~Node() {
+	delete right;
+	delete left;
 }
 
 int Node::getData() {
@@ -34,14 +36,14 @@ void Node::setRight(Node* newRight) {
 	right = newRight;
 }
 
-bool Node::operator<(const Node toCompare) {
+bool Node::operator<(const Node& toCompare) {
 	return data < toCompare.data;
 }
 
-bool Node::operator>(const Node toCompare) {
+bool Node::operator>(const Node& toCompare) {
 	return data > toCompare.data;
 }
 
-bool Node::operator==(const Node toCompare) {
+bool Node::operator==(const Node& toCompare) {
 	return data == toCompare.data;
 }
