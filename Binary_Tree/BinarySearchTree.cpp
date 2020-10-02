@@ -52,12 +52,13 @@ bool BinarySearchTree::isBalanced() {
 }
 
 bool BinarySearchTree::checkBalance() {
-	//uses red-black tree criteria for "close enough" balance
+	//uses AVL tree criteria for "close enough" balance
 	//height not more than 1 greater on one side than the other
 	return abs(calculateHeight(root->getLeft()) - calculateHeight(root->getRight())) < 2;
 }
 
 int BinarySearchTree::getHeight() {
+	//returns the total height of the BST
 	return calculateHeight(root);
 }
 

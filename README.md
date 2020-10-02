@@ -56,6 +56,87 @@ The average case in a non-balancing tree will fall squarely between the two, req
 * $\Omega(log_2(n))$
 * $Theta(nlog_2(n))$
 
-## Searching
+## Searching, Height, and Traversals
 
 The purpose of a BST is to allow for a binary search pattern on a linked list structure.  By inserting items in the pattern that it does, all searches will at least superficially follow a binary search pattern.  The actual efficiency of the search will depend on how effectively the BST has been built; a worst case structure will result in a worst case search, and likewise best case.
+
+The implementation for this assignment does not include an explicit search function, but the `getMin()`,  `getMax()` , and `calculateHeight()` methods follow the basic pattern.  the minimum and maximum methods are simpler than a search: the minimum will be the node farthest to the left, descending in a straight line from the root, and the maximum likewise to the right.  
+
+### Height
+
+Calculating the height requires a full search of every node of the tree to determine how many there are in the longest possible path:
+
+```cpp
+int BinarySearchTree::getHeight() {
+    //returns the total height of the BST
+	return calculateHeight(root);
+}
+
+int BinarySearchTree::calculateHeight(Node* node) {
+	//recursively adds up the height of subtrees and returns the greatest plus the current height
+	if (node == nullptr) {
+		//empty node has height of 0
+		return 0;
+	}
+	else if (node->getLeft() == nullptr && node->getRight() == nullptr) {
+		//height at node is 1 if there are no deeper subtrees
+		return 1;
+	}
+	else {
+		//height is 1 for current node, plus height of tallest subtree
+		int leftHeight = calculateHeight(node->getLeft());
+		int rightHeight = calculateHeight(node->getRight());
+		return  1 + max(leftHeight, rightHeight);
+	}
+}
+
+int BinarySearchTree::max(int a, int b) {
+	//helper function to return max of 2 integers
+	if (a >= b) {
+		return a;
+	}
+	else {
+		return b;
+	}
+}
+```
+
+For each node starting at the root, its height is equal to 1 if it is not null, plus the height of either its left or right subtree, whichever is greater.  This means that the function continues to recurse down the tree until every node has been visited, and then the returned values are summed up.  This must, by necessity, reach every node in the tree, and therefore always takes $O(n)$ time.
+
+This is also used as a subroutine to check the balance of the tree.  A tree is balanced if its subtrees are equal, or "close enough" for certain implementations.  I decided to go with a close enough implementation, where the trees is considered balanced as long as the subtrees do not have a difference in depth greater than one level.
+
+```cpp
+bool BinarySearchTree::checkBalance() {
+	//uses AVL tree criteria for "close enough" balance
+	//height not more than 1 greater on one side than the other
+	return abs(calculateHeight(root->getLeft()) - calculateHeight(root->getRight())) < 2;
+}
+```
+
+This follows the same pattern as calculating the height of the tree, and will always take $O(n)$ time.
+
+### Traversals
+
+There are three separate traversal patterns within this BST implementation: In-Order, Pre-Order, and Post-Order.  The use case for the traversals is very different, but they all meet the same complexity criteria.  I will go over Post-Order as my basis for analysis, recognizing that the other two are roughly the same, they just order the returned data differently.
+
+```cpp
+std::stringstream BinarySearchTree::dataPostOrder() {
+	return PostOrder(root);
+}
+
+std::stringstream BinarySearchTree::PostOrder(Node* node) {
+	//recursively returns contents of left subtree, then right subtree, then root
+	std::stringstream buffer;
+
+	if (node->getLeft() != nullptr) {
+		buffer << PostOrder(node->getLeft()).rdbuf();
+	}
+	if (node->getRight() != nullptr) {
+		buffer << PostOrder(node->getRight()).rdbuf();
+	}
+	buffer << node->getData() << "\n";
+	return buffer;
+}
+```
+
+At each level, a `std::stringstream` object is created to catch the data as it is pulled from the nodes.  Post-Order gets all the data to the left of the starting node first, then from the right, and finally adds the data from the current node, which is returned to the previous call.  By the end of the recursion, it will contain the entire left subtree left to right, bottom to top; the entire right subtree left to right, bottom to top; and the final piece is the root.  Just like the function to calculate the height, this requires the algorithm to visit every single node, making traversals always run in $O(n)$ time.
