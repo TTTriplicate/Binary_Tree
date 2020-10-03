@@ -52,9 +52,9 @@ In the best case, insertion follows the pattern of a binary search.  The first i
 
 The average case in a non-balancing tree will fall squarely between the two, requiring traversal of about half the tree on average, but potentially to an unbalanced side.  The formula can be expresses as $1 + \sum_{i=2}^n log_2(i)(i - 1)$.  This can be simplified to $Theta(nlog_2(n))$.
 
-* $O(n^2)$
+* $1 +\sum_{i=2}^n i(i-1) \sim O(n^2)$
 * $\Omega(log_2(n))$
-* $Theta(nlog_2(n))$
+* $1 + \sum_{i=2}^n log_2(i)(i - 1) \sim \Theta(nlog_2(n))$
 
 ## Searching, Height, and Traversals
 
