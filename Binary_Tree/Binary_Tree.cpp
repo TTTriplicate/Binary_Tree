@@ -31,6 +31,7 @@ int main()
 }
 
 void plantTree(BinarySearchTree& tree, std::string file) {
+    //reads data into a binary search tree from a specified file
     std::fstream fileIn;
     try {
         fileIn.open(file);
@@ -48,6 +49,7 @@ void plantTree(BinarySearchTree& tree, std::string file) {
 }
 
 void readTree(BinarySearchTree& tree) {
+    //outputs all traversals, tree height, and tree balance to console
     std::cout << "Tree in Post Order:\n" << tree.dataPostOrder().str() << std::endl << std::endl;
     std::cout << "Tree in Pre Order:\n" << tree.dataPreOrder().str() << std::endl << std::endl;
     std::cout << "Tree In Order:\n" << tree.dataInOrder().str() << std::endl << std::endl;

@@ -16,6 +16,7 @@ Node::Node(int inputData) {
 }
 
 Node::~Node() {
+	//this will delete any subtree of a deleted node
 	delete right;
 	delete left;
 }
@@ -40,14 +41,13 @@ void Node::setRight(Node* newRight) {
 	right = newRight;
 }
 
+//overloaded comparators for ease of use in BST
 bool Node::operator<(const Node& toCompare) {
 	return data < toCompare.data;
 }
-
 bool Node::operator>(const Node& toCompare) {
 	return data > toCompare.data;
 }
-
 bool Node::operator==(const Node& toCompare) {
 	return data == toCompare.data;
 }
